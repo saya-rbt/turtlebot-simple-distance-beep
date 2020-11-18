@@ -9,7 +9,6 @@ from kobuki_msgs.msg import Sound
 
 class SoundMinDistFeedback:
     def __init__(self):
-        rospy.init_node('sound_min_dist_feedback', anonymous=True)
         rospy.loginfo("beeper: launched!")
         self.pub = rospy.Publisher('/mobile_base/commands/sound', Sound, queue_size=1)
         rospy.Subscriber('/min_dist', String, self.callback)
@@ -25,7 +24,7 @@ class SoundMinDistFeedback:
 
     def callback(self, data):
         min_dist_val = float(data.data)
-        rospy.loginfo("val: " + str(min_dist_val))
+        rospy.logdebug("val: " + str(min_dist_val))
         if min_dist_val > 1:
             self.rateint = 1
         elif min_dist_val < 1 and min_dist_val > 0.75:
@@ -37,5 +36,6 @@ class SoundMinDistFeedback:
     
 
 if __name__ == '__main__':
+    rospy.init_node('sound_min_dist_feedback', anonymous=True)
     c = SoundMinDistFeedback()
     rospy.spin()

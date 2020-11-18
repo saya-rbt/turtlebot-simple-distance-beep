@@ -15,23 +15,20 @@ $ catkin_make
 $ source devel/setup.bash
 ```
 
-Add the 3 scripts to your `CMakeLists.txt`:
-
-```
-catkin_install_python(PROGRAMS
-  scripts/collision_warning.py
-  scripts/min_dist_detection.py
-  scripts/sound_min_dist_feedback.py
-  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
-```
-
 ## Run
 
 This works with 3 scripts (though it could've been made in one, this has been done so because it was initially a class assignment):
 * `collision_detection.py` gathers info from the bumper and publishes a sound if it got hit
 * `min_dist_detection.py` gathers the information from the `astra` laser sensor on the turtlebot and publishes it on `/min_dist`
 * `sound_min_dist_feedback` subscribes to `/min_dist`, examines the distance, and beeps (= publishes on `/mobile_base/commands/sound`) faster or slower depending on how close of an obstacle it is.
+
+There is a fourth very simple script, `collision_prevention.py`, that takes every class and instantiates them all at once.
+
+### Start everything at once
+
+```
+$ rosrun collision collision_prevention.py
+```
 
 ### Start scripts separately
 

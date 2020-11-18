@@ -9,7 +9,6 @@ from sensor_msgs.msg import LaserScan
 
 class MinDistDetection:
     def __init__(self):
-        rospy.init_node('min_dist_detection', anonymous=True)
         rospy.loginfo("min_dist: launched!")
         self.pub = rospy.Publisher('/min_dist', String, queue_size=10)
         rospy.Subscriber('/scan', LaserScan, self.callback)
@@ -19,10 +18,11 @@ class MinDistDetection:
 
     def callback(self, data):
         min_dist_val = str(np.nanmin(data.ranges))
-        rospy.loginfo(min_dist_val)
+        rospy.logdebug(min_dist_val)
         self.talker(min_dist_val)
     
 
 if __name__ == '__main__':
+    rospy.init_node('min_dist_detection', anonymous=True)
     c = MinDistDetection()
     rospy.spin()

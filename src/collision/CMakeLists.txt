@@ -165,6 +165,7 @@ catkin_install_python(PROGRAMS
   scripts/collision_warning.py
   scripts/min_dist_detection.py
   scripts/sound_min_dist_feedback.py
+  scripts/collision_prevention.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

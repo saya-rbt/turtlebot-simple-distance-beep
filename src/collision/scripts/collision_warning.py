@@ -9,7 +9,6 @@ from kobuki_msgs.msg import Sound
 
 class CollisionWarning:
     def __init__(self):
-        rospy.init_node('collision_warning', anonymous=True)
         rospy.loginfo("collision: launched!")
         self.pub = rospy.Publisher('/mobile_base/commands/sound', Sound, queue_size=10)
         rospy.Subscriber('/mobile_base/events/bumper', BumperEvent, self.callback)
@@ -24,5 +23,6 @@ class CollisionWarning:
     
 
 if __name__ == '__main__':
+    rospy.init_node('collision_warning', anonymous=True)
     c = CollisionWarning()
     rospy.spin()
