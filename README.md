@@ -15,6 +15,17 @@ $ catkin_make
 $ source devel/setup.bash
 ```
 
+Add the 3 scripts to your `CMakeLists.txt`:
+
+```
+catkin_install_python(PROGRAMS
+  scripts/collision_warning.py
+  scripts/min_dist_detection.py
+  scripts/sound_min_dist_feedback.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+```
+
 ## Run
 
 This works with 3 scripts (though it could've been made in one, this has been done so because it was initially a class assignment):
