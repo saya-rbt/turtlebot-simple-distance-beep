@@ -6,11 +6,13 @@ import rospy
 import numpy as np
 from std_msgs.msg import String
 from kobuki_msgs.msg import Sound
+from kobuki_msgs.msg import Led
 
 class SoundMinDistFeedback:
     def __init__(self):
         rospy.loginfo("beeper: launched!")
         self.pub = rospy.Publisher('/mobile_base/commands/sound', Sound, queue_size=1)
+        self.ledpub = rospy.Publisher('mobile_base/commands/led1', Led, queue_size=1) 
         rospy.Subscriber('/min_dist', String, self.callback)
         self.rateint = 1
         self.change_rate()
@@ -21,6 +23,8 @@ class SoundMinDistFeedback:
             self.rate.sleep()
             if self.rateint > 1:
                 self.pub.publish(Sound(3))
+                self.ledpub.publish(Led(1))
+                self.ledpub.publish(Led(0))
                 rospy.loginfo("beeper: beep! going to sleep.")
 
     def callback(self, data):
