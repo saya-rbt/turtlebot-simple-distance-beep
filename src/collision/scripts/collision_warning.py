@@ -18,7 +18,7 @@ class CollisionWarning:
 
     def callback(self, data):
         if data.state == BumperEvent.PRESSED:
-            rospy.loginfo('PAF')
+            rospy.loginfo('hit detected!')
             self.talker()
     
 
