@@ -19,8 +19,9 @@ class SoundMinDistFeedback:
         while not rospy.is_shutdown():
             self.rate = rospy.Rate(self.rateint)
             self.rate.sleep()
-            self.pub.publish(Sound(3))
-            rospy.loginfo("beeper: beep! going to sleep.")
+            if self.rateint > 1:
+                self.pub.publish(Sound(3))
+                rospy.loginfo("beeper: beep! going to sleep.")
 
     def callback(self, data):
         min_dist_val = float(data.data)
