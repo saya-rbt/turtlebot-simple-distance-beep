@@ -17,11 +17,18 @@ $ source devel/setup.bash
 
 ## Run
 
-This works with two scripts (though it could've been made in one, this has been done so because it was initially a class assignment):
-* `min_dist_detection.py` gathers the information from the `astra` laser sensor on the turtlebot and publishes it on `/my_dist`
-* `sound_min_dist_feedback` subscribes to `/my_dist`, examines the distance, and beeps (= publishes on `/mobile_base/commands/sound`) faster or slower depending on how close of an obstacle it is.
+This works with 3 scripts (though it could've been made in one, this has been done so because it was initially a class assignment):
+* `collision_detection.py` gathers info from the bumper and publishes a sound if it got hit
+* `min_dist_detection.py` gathers the information from the `astra` laser sensor on the turtlebot and publishes it on `/min_dist`
+* `sound_min_dist_feedback` subscribes to `/min_dist`, examines the distance, and beeps (= publishes on `/mobile_base/commands/sound`) faster or slower depending on how close of an obstacle it is.
 
-In two terminals:
+### Start scripts separately
+
+In different terminals:
+
+```
+$ rosrun collision collision_warning.py
+```
 
 ```
 $ rosrun collision min_dist_detection.py
